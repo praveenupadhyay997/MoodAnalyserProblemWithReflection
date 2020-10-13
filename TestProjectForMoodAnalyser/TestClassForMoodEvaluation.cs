@@ -133,6 +133,60 @@ namespace TestProjectForMoodAnalyser
             {
                 Assert.AreEqual("No such constructor found", customException.Message);
             }
-        
+
+        }
+        /// <summary>
+        /// TC 5.1 When the right class name is passed, it should return object of mood analyser class
+        /// </summary>
+        [TestMethod]
+        public void CreateParameterizedObjectOfMoodAnalyserClass()
+        {
+            //Arrange
+            MoodAnalyserClass moodAnalyser= new MoodAnalyserClass();
+            //Act
+            var obj = MoodAnalyserFactory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today");
+            //Assert
+            obj.Equals(moodAnalyser);
+        }
+
+        /// <summary>
+        /// TC 5.2 When a wrong class name is passed then throw exception
+        /// </summary>
+        [TestMethod]
+        public void CreateParameterizedObjectOfMoodAnalyseInvalidClassName()
+        {
+            //Arrange
+            MoodAnalyserClass moodAnalyser = new MoodAnalyserClass();
+            //Act
+            try
+            {
+                var obj = MoodAnalyserFactory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", "I am in happy mood today");
+            }
+            //Assert
+            catch (MoodAnalysisCustomException exception)
+            {
+                Assert.AreEqual("No such class found", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// TC 5.3 When a erong constructor name is passed then throw an exception
+        /// </summary>
+        [TestMethod]
+        public void CreateParameterizedObjectOfMoodAnalyseInvalidConstructor()
+        {
+            //Arrange
+            MoodAnalyserClass moodAnalyser = new MoodAnalyserClass();
+            //Act
+            try
+            {
+                var obj = MoodAnalyserFactory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", "I am in a happy mood today");
+            }
+            //Assert
+            catch (MoodAnalysisCustomException exception)
+            {
+                Assert.AreEqual("No such constructor found", exception.Message);
+            }
+        }
     }
 }
