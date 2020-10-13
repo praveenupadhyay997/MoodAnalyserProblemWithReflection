@@ -18,6 +18,7 @@ namespace MoodAnalyserProblem
 
         public MoodAnalyserClass(string message)
         {
+            if(!string.IsNullOrEmpty(message))
             this.message = message.ToUpper();
         }
 
@@ -28,12 +29,25 @@ namespace MoodAnalyserProblem
         /// <returns></returns>
         public string analyseMood()
         {
-            if (this.message.Contains("SAD"))
-                return "SAD";
-            else if (this.message.Contains("HAPPY") || message.Contains("ANY"))
-                return "HAPPY";
-            else
-                return "NO COMMENTS";
+            try
+            {
+                if (!String.IsNullOrEmpty(message))
+                {
+                    if (message.ToUpper().Contains("SAD"))
+                        return "SAD";
+                    else if (message.ToUpper().Contains("HAPPY") || message.ToUpper().Contains("ANY"))
+                        return "HAPPY";
+                    else
+                        return "HAPPY";
+                }
+                else
+                    throw new NullReferenceException();
+            }
+            catch (NullReferenceException nullException)
+            {
+                return nullException.Message;
+            }
+
         }
     }
 }
