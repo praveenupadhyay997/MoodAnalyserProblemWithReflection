@@ -69,7 +69,7 @@ namespace TestProjectForMoodAnalyser
         [TestMethod]
         public void Given_EmptyMood_UsingMoodAnalysisCustomException_ExpectingEmpty()
         {
-            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass("");
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
             try
             {
                 //Act
@@ -79,6 +79,59 @@ namespace TestProjectForMoodAnalyser
             {
                 //Assert
                 Assert.AreEqual("Mood should not be EMPTY", exception.Message);
+            }
+        }
+        /// <summary>
+        /// Test Case 4.1 to match both class name and constructor name
+        /// </summary>
+        [TestMethod]
+        public void CreateObjectOfMoodAnalyse()
+        {
+            //Arrange
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
+            //Act
+            var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass" );
+            //Assert
+            objectFromFactory.Equals(moodAnalyserClass);
+
+        }
+        /// <summary>
+        /// Test Case 4.2 To return exception when wrong class name is passed
+        /// </summary>
+        [TestMethod]
+        public void CreateObjectOfMoodAnalyseInvalidClassName()
+        {
+            //Arrange
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
+            //Act
+            try
+            {
+                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass");
+            }
+            //Assert
+            catch (MoodAnalysisCustomException customException)
+            {
+                Assert.AreEqual("No such class found", customException.Message);
+            }
+        }
+
+        /// <summary>
+        /// Test Case 4.3 To return exception for wrong constructor name
+        /// </summary>
+        [TestMethod]
+        public void CreateObjectOfMoodAnalyseInvalidConstructor()
+        {
+            //Arrange
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
+            //Act
+            try
+            {
+                var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser");
+            }
+            //Assert
+            catch (MoodAnalysisCustomException customException)
+            {
+                Assert.AreEqual("No such constructor found", customException.Message);
             }
         }
     }
