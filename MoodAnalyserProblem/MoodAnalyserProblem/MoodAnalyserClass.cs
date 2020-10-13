@@ -6,19 +6,31 @@ namespace MoodAnalyserProblem
 {
     public class MoodAnalyserClass
     {
-        public static string message;
+        public string message;
+
+        /// <summary>
+        /// Initializes a new default instance of the <see cref="MoodAnalyserClass"/> class.
+        /// </summary>
+        public MoodAnalyserClass()
+        {
+            this.message = null;
+        }
+
+        public MoodAnalyserClass(string message)
+        {
+            this.message = message.ToUpper();
+        }
 
         /// <summary>
         /// Analyses the mood.
         /// </summary>
         /// <param name="messageRecieved">The message recieved.</param>
         /// <returns></returns>
-        public string analyseMood(string messageRecieved)
+        public string analyseMood()
         {
-            message = messageRecieved.ToUpper();
-            if (message.Contains("SAD"))
+            if (this.message.Contains("SAD"))
                 return "SAD";
-            else if (message.Contains("HAPPY") || message.Contains("ANY"))
+            else if (this.message.Contains("HAPPY") || message.Contains("ANY"))
                 return "HAPPY";
             else
                 return "NO COMMENTS";
