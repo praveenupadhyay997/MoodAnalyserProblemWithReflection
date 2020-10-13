@@ -20,6 +20,9 @@ namespace MoodAnalyserProblem
 
             Console.WriteLine("\n ============================================================");
             MoodAnalyserReflectionClass.ReflectMoodAnalyser();
+
+            //Creating MoodAnalyserClass object at run time
+            MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today");
             Console.ReadKey();
         }
     }

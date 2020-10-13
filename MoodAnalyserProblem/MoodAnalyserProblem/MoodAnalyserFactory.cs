@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
 
 namespace MoodAnalyserProblem
 {
     public class MoodAnalyserFactory
     {
-        public static Object CreateMoodAnalyserObject(string className, string constructor)
+        public static Object CreateMoodAnalyserObject(string className, string constructor, string message)
         {
-            //Accessing the type of the Mood Analyser Class
+            //getting the type of class MoodAnalyse
             Type type = typeof(MoodAnalyserClass);
-
+            //If the class name exists in given assembly
             if (type.Name.Equals(className) || type.FullName.Equals(className))
             {
-
+                //If the constructor passed is correct
                 if (type.Name.Equals(constructor))
                 {
-                    return Activator.CreateInstance(type);
+                    return Activator.CreateInstance(type, message);
                 }
-
+                //If the constructor passed doesnt exist then throw error
                 else
                     throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_CONSTRUCTOR, "No such constructor found");
             }
