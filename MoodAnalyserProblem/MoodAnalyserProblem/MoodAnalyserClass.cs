@@ -18,7 +18,7 @@ namespace MoodAnalyserProblem
             message = messageRecieved.ToUpper();
             if (message.Contains("SAD"))
                 return "SAD";
-            else if (message.Contains("HAPPY"))
+            else if (message.Contains("HAPPY") || message.Contains("ANY"))
                 return "HAPPY";
             else
                 return "NO COMMENTS";
