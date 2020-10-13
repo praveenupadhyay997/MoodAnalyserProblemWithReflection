@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MoodAnalyserProblem
 {
-    class MoodAnalyserClass
+    public class MoodAnalyserClass
     {
         public static string message;
 
