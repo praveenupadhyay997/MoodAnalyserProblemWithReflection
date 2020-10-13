@@ -85,7 +85,7 @@ namespace TestProjectForMoodAnalyser
         /// Test Case 4.1 to match both class name and constructor name
         /// </summary>
         [TestMethod]
-        public void CreateObjectOfMoodAnalyse()
+        public void CreateObjectOfMoodAnalyserClass()
         {
             //Arrange
             MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
@@ -99,7 +99,7 @@ namespace TestProjectForMoodAnalyser
         /// Test Case 4.2 To return exception when wrong class name is passed
         /// </summary>
         [TestMethod]
-        public void CreateObjectOfMoodAnalyseInvalidClassName()
+        public void CreateObjectOfMoodAnalyserClassWithWrongClassName()
         {
             //Arrange
             MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
@@ -119,7 +119,7 @@ namespace TestProjectForMoodAnalyser
         /// Test Case 4.3 To return exception for wrong constructor name
         /// </summary>
         [TestMethod]
-        public void CreateObjectOfMoodAnalyseInvalidConstructor()
+        public void CreateObjectOfMoodAnalyserClassWithWrongConstructor()
         {
             //Arrange
             MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
@@ -133,6 +133,6 @@ namespace TestProjectForMoodAnalyser
             {
                 Assert.AreEqual("No such constructor found", customException.Message);
             }
-        }
+        
     }
 }
