@@ -12,9 +12,9 @@ namespace TestProjectForMoodAnalyser
         public void TestMethodForSadMood()
         {
             //Access
-            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass("I am in sad mood today");
             //Act
-            string actual = moodAnalyserClass.analyseMood("I am in sad mood today");
+            string actual = moodAnalyserClass.analyseMood();
             //Assert
             Assert.AreEqual(SAD_MOOD, actual);
         }
@@ -23,9 +23,9 @@ namespace TestProjectForMoodAnalyser
         public void TestMethodForHappyMood()
         {
             //Access
-            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass("I am in any mood today");
             //Act
-            string actual = moodAnalyserClass.analyseMood("I am in any mood today");
+            string actual = moodAnalyserClass.analyseMood();
             //Assert
             Assert.AreEqual(HAPPY_MOOD, actual);
         }
