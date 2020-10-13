@@ -41,11 +41,14 @@ namespace MoodAnalyserProblem
                         return "HAPPY";
                 }
                 else
-                    throw new NullReferenceException();
+                {
+                    return "HAPPY";
+                }
             }
             catch (NullReferenceException nullException)
             {
-                return nullException.Message;
+                Console.WriteLine(nullException.Message);
+                return "HAPPY";
             }
 
         }
