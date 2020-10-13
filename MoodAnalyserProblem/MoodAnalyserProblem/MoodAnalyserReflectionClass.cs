@@ -7,6 +7,9 @@ namespace MoodAnalyserProblem
 {
     public class MoodAnalyserReflectionClass
     {
+        /// <summary>
+        /// Reflection method to get all the details of MethodAnalyserClass
+        /// </summary>
         public static void ReflectMoodAnalyser()
         {
             Type type = Type.GetType("MoodAnalyserProblem.MoodAnalyserClass");
