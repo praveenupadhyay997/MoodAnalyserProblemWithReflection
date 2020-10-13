@@ -39,15 +39,13 @@ namespace MoodAnalyserProblem
                     else
                         return "HAPPY";
                 }
-                else
+                else if (this.message.Equals(string.Empty))
                 {
-                    if (this.message.Equals(string.Empty))
-                    {
-                        throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.EMPTY_MESSAGE, "Mood should not be EMPTY");
-                    }
-                    else
-                        throw new NullReferenceException();
+                    throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.EMPTY_MESSAGE, "Mood should not be EMPTY");
                 }
+                else
+                    throw new NullReferenceException();
+
             }
             catch (NullReferenceException)
             {
@@ -57,3 +55,4 @@ namespace MoodAnalyserProblem
         }
     }
 }
+
