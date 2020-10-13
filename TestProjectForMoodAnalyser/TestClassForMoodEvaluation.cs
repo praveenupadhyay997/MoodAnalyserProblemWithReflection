@@ -63,5 +63,23 @@ namespace TestProjectForMoodAnalyser
                 Assert.AreEqual("Mood should not be NULL", exception.Message);
             }
         }
+        /// <summary>
+        /// Passes Empty message and returns Mood is not EMPTY using Custom Exception Class
+        /// </summary>
+        [TestMethod]
+        public void Given_EmptyMood_UsingMoodAnalysisCustomException_ExpectingEmpty()
+        {
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass("");
+            try
+            {
+                //Act
+                string actual = moodAnalyserClass.analyseMood();
+            }
+            catch (MoodAnalysisCustomException exception)
+            {
+                //Assert
+                Assert.AreEqual("Mood should not be EMPTY", exception.Message);
+            }
+        }
     }
 }
