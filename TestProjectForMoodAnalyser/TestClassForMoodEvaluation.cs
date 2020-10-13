@@ -90,7 +90,7 @@ namespace TestProjectForMoodAnalyser
             //Arrange
             MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
             //Act
-            var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", null);
+            var objectFromFactory = MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", null);
             //Assert
             objectFromFactory.Equals(moodAnalyserClass);
 
@@ -106,7 +106,7 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", null);
+                var obj = MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", null);
             }
             //Assert
             catch (MoodAnalysisCustomException customException)
@@ -126,7 +126,7 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", null);
+                var objectFromFactory = MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", null);
             }
             //Assert
             catch (MoodAnalysisCustomException customException)
@@ -144,7 +144,7 @@ namespace TestProjectForMoodAnalyser
             //Arrange
             MoodAnalyserClass moodAnalyser= new MoodAnalyserClass();
             //Act
-            var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today");
+            var obj = MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today");
             //Assert
             obj.Equals(moodAnalyser);
         }
@@ -160,7 +160,7 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", "I am in happy mood today");
+                var obj = MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", "I am in happy mood today");
             }
             //Assert
             catch (MoodAnalysisCustomException exception)
@@ -180,12 +180,66 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", "I am in a happy mood today");
+                var obj = MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", "I am in a happy mood today");
             }
             //Assert
             catch (MoodAnalysisCustomException exception)
             {
                 Assert.AreEqual("No such constructor found", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// TC 6.1 When we give right class name, constructor name and message passed as happy mood and valid method name then should return HAPPY
+        /// </summary>
+        [TestMethod]
+        public void InvokeMethodOfMoodAnalyser()
+        {
+            //Arrange
+            MoodAnalyserClass moodAnalyser = new MoodAnalyserClass("I am in happy mood today");
+            //Act
+            object actual = MoodAnalyserReflector.InvokeMethod("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today", "analyseMood");
+            //Assert
+            Assert.AreEqual("HAPPY", actual);
+        }
+
+        /// <summary>
+        /// TC 6.2 When we give right class name, constructor name and message passed as happy mood and valid method name then should throw exception 
+        /// </summary>
+        [TestMethod]
+        public void InvokeMethodOfMoodAnalyserInvalid()
+        {
+            //Act
+            try
+            {
+                MoodAnalyserClass moodAnalyser = new MoodAnalyserClass("I am in happy mood today");
+                object expected = moodAnalyser.analyseMood();
+                object actual = MoodAnalyserReflector.InvokeMethod("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today", "InvalidMethod");
+            }
+            //Assert
+            catch (MoodAnalysisCustomException exception)
+            {
+                Assert.AreEqual("No such method found", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// TC 6.3 When we give right class name, constructor name and message passed as null and valid method name then should throw exception 
+        /// </summary>
+        [TestMethod]
+        public void InvokeMethodOfMoodAnalyserNullMessage()
+        {
+            //Act
+            try
+            {
+                MoodAnalyserClass moodAnalyser = new MoodAnalyserClass();
+                object expected = moodAnalyser.analyseMood();
+                object actual = MoodAnalyserReflector.InvokeMethod("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", null, "InvalidMethod");
+            }
+            //Assert
+            catch (MoodAnalysisCustomException exception)
+            {
+                Assert.AreEqual("Mood should not be NULL", exception.Message);
             }
         }
     }

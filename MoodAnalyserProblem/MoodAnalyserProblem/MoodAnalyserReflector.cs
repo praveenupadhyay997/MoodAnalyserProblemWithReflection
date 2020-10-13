@@ -5,11 +5,11 @@ using System.Reflection;
 
 namespace MoodAnalyserProblem
 {
-    public class MoodAnalyserFactory
+    public class MoodAnalyserReflector
     {
         public static Object CreateMoodAnalyserObject(string className, string constructor, string message)
         {
-            //getting the type of class MoodAnalyse
+            //getting the type of MoodAnalyserClass
             Type type = typeof(MoodAnalyserClass);
             //If the class name exists in given assembly
             if (type.Name.Equals(className) || type.FullName.Equals(className))
@@ -27,6 +27,25 @@ namespace MoodAnalyserProblem
             else
             {
                 throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_CLASS, "No such class found");
+            }
+        }
+
+        public static Object InvokeMethod(string className, string constuctor, string message, string methodName)
+        {
+            //Get the instance of the MoodAnalyserClass and create a constructor
+            object moodAnalysis = CreateMoodAnalyserObject(className, constuctor, message);
+            Type type = typeof(MoodAnalyserClass);
+            try
+            {
+                //Fetching the method info using reflection
+                MethodInfo methodInfo = type.GetMethod(methodName);
+                //Invoking the method of Mood Analyser Class
+                Object obj = methodInfo.Invoke(moodAnalysis, null);
+                return obj;
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_METHOD, "No such method found");
             }
         }
     }
