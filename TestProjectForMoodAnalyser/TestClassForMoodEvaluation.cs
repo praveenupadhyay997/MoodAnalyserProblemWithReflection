@@ -90,7 +90,7 @@ namespace TestProjectForMoodAnalyser
             //Arrange
             MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
             //Act
-            var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass" );
+            var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", null);
             //Assert
             objectFromFactory.Equals(moodAnalyserClass);
 
@@ -106,7 +106,7 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass");
+                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", null);
             }
             //Assert
             catch (MoodAnalysisCustomException customException)
@@ -126,7 +126,7 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser");
+                var objectFromFactory = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", null);
             }
             //Assert
             catch (MoodAnalysisCustomException customException)
@@ -144,7 +144,7 @@ namespace TestProjectForMoodAnalyser
             //Arrange
             MoodAnalyserClass moodAnalyser= new MoodAnalyserClass();
             //Act
-            var obj = MoodAnalyserFactory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today");
+            var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today");
             //Assert
             obj.Equals(moodAnalyser);
         }
@@ -160,7 +160,7 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var obj = MoodAnalyserFactory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", "I am in happy mood today");
+                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", "I am in happy mood today");
             }
             //Assert
             catch (MoodAnalysisCustomException exception)
@@ -180,7 +180,7 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
-                var obj = MoodAnalyserFactory.CreateMoodAnalyserParameterizedObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", "I am in a happy mood today");
+                var obj = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyser", "I am in a happy mood today");
             }
             //Assert
             catch (MoodAnalysisCustomException exception)
