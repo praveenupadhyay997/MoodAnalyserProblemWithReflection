@@ -64,7 +64,7 @@ namespace MoodAnalyserProblem
         }
 
         /// <summary>
-        /// Changes the field of mood dynamically.
+        /// Changes the value of mood dynamically.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="fieldName">Name of the field.</param>
@@ -105,7 +105,7 @@ namespace MoodAnalyserProblem
             }
             catch
             {
-                throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NULL_TYPE, "Null mood not accepted");
+                throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NULL_MESSAGE, "Mood should not be NULL");
             }
         }
     }
