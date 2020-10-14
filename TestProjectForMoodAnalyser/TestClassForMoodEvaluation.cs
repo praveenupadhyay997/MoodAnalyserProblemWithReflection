@@ -242,5 +242,54 @@ namespace TestProjectForMoodAnalyser
                 Assert.AreEqual("Mood should not be NULL", exception.Message);
             }
         }
+
+        /// <summary>
+        /// TC 7.1 When given proper fieldName and a mood message for happy mood then should return HAPPY
+        /// </summary>
+        [TestMethod]
+        public void ChangeMoodDynamicallyForValidFieldName()
+        {
+            // ACT
+            object actual = MoodAnalyserReflector.ChangingTheMoodDynamically("I am happy today", "message");
+
+            // Assert
+            Assert.AreEqual("HAPPY", actual);
+        }
+
+        /// <summary>
+        ///  TC 7.2 When given wrong fieldName and a happy mood message then should throw exception
+        /// </summary>
+        [TestMethod]
+        public void ChangeMoodDynamicallyInValid()
+        {
+            try
+            {
+                // ACT
+                object actual = MoodAnalyserReflector.ChangingTheMoodDynamically("I am in happy mood today", "InvalidField");
+            }
+            catch (MoodAnalysisCustomException exception)
+            {
+                // Assert
+                Assert.AreEqual("No such field found", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// TC 7.3 When given correct fieldName and passing a null mood message then throw error that Mood should not be NULL
+        /// </summary>
+        [TestMethod]
+        public void ChangeMoodDynamicallySetNull()
+        {
+            try
+            {
+                // ACT
+                object actual = MoodAnalyserReflector.ChangingTheMoodDynamically(null, "message");
+            }
+            catch (MoodAnalysisCustomException exception)
+            {
+                // Assert
+                Assert.AreEqual("No such field found", exception.Message);
+            }
+        }
     }
 }

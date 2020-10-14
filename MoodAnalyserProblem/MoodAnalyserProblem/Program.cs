@@ -23,6 +23,12 @@ namespace MoodAnalyserProblem
 
             //Creating MoodAnalyserClass object at run time
             MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass", "I am in happy mood today");
+
+            // Invoking Method using reflections
+            MoodAnalyserReflector.InvokeMethod("MoodAnalyserProblem.MoodAnalyserClass", "MoodAnalyserClass","I am in a happy mood", "analyseMood");
+
+            // Calling the changing mood dynamically method to change the mood messages dynamically
+            MoodAnalyserReflector.ChangingTheMoodDynamically("I am Sad today", "message");
             Console.ReadKey();
         }
     }
