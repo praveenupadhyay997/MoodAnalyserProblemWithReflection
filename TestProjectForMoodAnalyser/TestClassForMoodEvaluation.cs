@@ -1,8 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MoodAnalyserProblem;
-
 namespace TestProjectForMoodAnalyser
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MoodAnalyserProblem;
+
     [TestClass]
     public class TestClassForMoodEvaluation
     {
@@ -41,9 +41,15 @@ namespace TestProjectForMoodAnalyser
             //Access
             MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass(null);
             //Act
-            string actual = moodAnalyserClass.analyseMood();
-            //Assert
-            Assert.AreEqual(HAPPY_MOOD, actual);
+            try
+            {
+                string actual = moodAnalyserClass.analyseMood();
+            }
+            catch(MoodAnalysisCustomException exception)
+            {
+                //Assert
+                Assert.AreEqual("Mood should not be NULL", exception.Message);
+            }            
         }
         /// <summary>
         /// Passes Null message and returns Mood is not NULL using Custom Exception Class
@@ -69,7 +75,7 @@ namespace TestProjectForMoodAnalyser
         [TestMethod]
         public void Given_EmptyMood_UsingMoodAnalysisCustomException_ExpectingEmpty()
         {
-            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass();
+            MoodAnalyserClass moodAnalyserClass = new MoodAnalyserClass("");
             try
             {
                 //Act
@@ -247,7 +253,7 @@ namespace TestProjectForMoodAnalyser
         /// TC 7.1 When given proper fieldName and a mood message for happy mood then should return HAPPY
         /// </summary>
         [TestMethod]
-        public void ChangeMoodDynamicallyForValidFieldName()
+        public void ChangingTheMoodDynamicallyForValidFieldName()
         {
             // ACT
             object actual = MoodAnalyserReflector.ChangingTheMoodDynamically("I am happy today", "message");
@@ -260,7 +266,7 @@ namespace TestProjectForMoodAnalyser
         ///  TC 7.2 When given wrong fieldName and a happy mood message then should throw exception
         /// </summary>
         [TestMethod]
-        public void ChangeMoodDynamicallyInValid()
+        public void ChangingTheMoodDynamicallyInCaseOfInvalidFieldName()
         {
             try
             {
@@ -278,7 +284,7 @@ namespace TestProjectForMoodAnalyser
         /// TC 7.3 When given correct fieldName and passing a null mood message then throw error that Mood should not be NULL
         /// </summary>
         [TestMethod]
-        public void ChangeMoodDynamicallySetNull()
+        public void ChangingTheMoodDynamicallyWhenNullMoodPassed()
         {
             try
             {
@@ -288,7 +294,7 @@ namespace TestProjectForMoodAnalyser
             catch (MoodAnalysisCustomException exception)
             {
                 // Assert
-                Assert.AreEqual("No such field found", exception.Message);
+                Assert.AreEqual("Mood should not be NULL", exception.Message);
             }
         }
     }

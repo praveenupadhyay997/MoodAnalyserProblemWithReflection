@@ -15,10 +15,10 @@ namespace MoodAnalyserProblem
             Type type = Type.GetType("MoodAnalyserProblem.MoodAnalyserClass");
 
             ///Printing the fullname
-            Console.WriteLine("FullName is {0} " + type.FullName);
+            Console.WriteLine("FullName is {0} " ,type.FullName);
 
             ///Printing the Class name
-            Console.WriteLine("FullName is {0} " + type.Name);
+            Console.WriteLine("Name is {0} " , type.Name);
 
             ///Getting details of methods of Mood Analyser Class
             MethodInfo[] methodDetails = type.GetMethods();
@@ -33,7 +33,7 @@ namespace MoodAnalyserProblem
             PropertyInfo[] propertyDetails = type.GetProperties();
             foreach (PropertyInfo property in propertyDetails)
             {
-                Console.WriteLine("Methods are {0} {1} " + property.PropertyType.Name + " " + property.Name);
+                Console.WriteLine("Methods are {0} {1} " , property.PropertyType.Name , " " + property.Name);
             }
 
             ///Getting details of Constructors of Method Analyser Class

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MoodAnalyserProblem
+﻿namespace MoodAnalyserProblem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class MoodAnalysisCustomException : Exception
     {
         /// <summary>
         /// Enumerating two message as constant variables 0-Empty Message and 1-Null Message 2-No such Class 3-No Such Constructor
-        /// 4-No Such Method
+        /// 4-No Such Method 5-No such field
         /// </summary>
         public enum ExceptionType
         {

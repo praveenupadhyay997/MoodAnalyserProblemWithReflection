@@ -19,6 +19,7 @@ namespace MoodAnalyserProblem
             Console.WriteLine("The mood of your customer is {0}", moodAnalyser.analyseMood());
 
             Console.WriteLine("\n ============================================================");
+            //Displaying all the metadata using the reflection
             MoodAnalyserReflectionClass.ReflectMoodAnalyser();
 
             //Creating MoodAnalyserClass object at run time

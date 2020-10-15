@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MoodAnalyserProblem
+﻿namespace MoodAnalyserProblem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class MoodAnalyserClass
     {
         public string message;
@@ -50,6 +50,10 @@ namespace MoodAnalyserProblem
             catch (NullReferenceException)
             {
                 throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NULL_MESSAGE, "Mood should not be NULL");
+            }
+            catch(MoodAnalysisCustomException exception)
+            {
+                return exception.Message;
             }
 
         }

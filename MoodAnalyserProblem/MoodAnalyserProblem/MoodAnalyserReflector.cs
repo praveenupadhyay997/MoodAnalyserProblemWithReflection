@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
-
-namespace MoodAnalyserProblem
+﻿namespace MoodAnalyserProblem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Reflection;
+
     public class MoodAnalyserReflector
     {
         /// <summary>
         /// Refactored Code for the default and parameterised constructor both
         /// </summary>
         /// <param name="className"></param>
-        /// <param name="constructor"></param>
+        /// <param name="constructorName"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static Object CreateMoodAnalyserObject(string className, string constructor, string message)
+        public static Object CreateMoodAnalyserObject(string className, string constructorName, string message)
         {
             //getting the type of MoodAnalyserClass
             Type type = typeof(MoodAnalyserClass);
@@ -22,15 +22,16 @@ namespace MoodAnalyserProblem
             if (type.Name.Equals(className) || type.FullName.Equals(className))
             {
                 //If the constructor passed is correct
-                if (type.Name.Equals(constructor))
+                if (type.Name.Equals(constructorName))
                 {
+                    //Creates instance of class by calling the parameterised constructor for some non-empty message passed and defaul constructor in case of null message
                     return Activator.CreateInstance(type, message);
                 }
-                //If the constructor passed doesnt exist then throw error
+                //If the constructor passed doesnt exist then throw custom exception of constructor not found
                 else
                     throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_CONSTRUCTOR, "No such constructor found");
             }
-            //If the class passed doesnt exist throw custom exception
+            //If the class passed doesnt exist throw custom exception of class not found
             else
             {
                 throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_CLASS, "No such class found");
@@ -55,6 +56,7 @@ namespace MoodAnalyserProblem
                 MethodInfo methodInfo = type.GetMethod(methodName);
                 //Invoking the method of Mood Analyser Class
                 Object obj = methodInfo.Invoke(moodAnalysis, null);
+                //Return the obj instance created in case correct class name and constructor name is passed
                 return obj;
             }
             catch (NullReferenceException)
@@ -64,7 +66,7 @@ namespace MoodAnalyserProblem
         }
 
         /// <summary>
-        /// Changes the value of mood dynamically.
+        /// Changes the value of mood message dynamically.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="fieldName">Name of the field.</param>
@@ -76,26 +78,25 @@ namespace MoodAnalyserProblem
         /// </exception>
         public static Object ChangingTheMoodDynamically(string message, string fieldName)
         {
-            // Get the type of the class
+            // Getting the metadata of the class
             Type type = typeof(MoodAnalyserClass);
 
-            // Create an object of class
+            // Creating an instance of the mood analyser class
             object mood = Activator.CreateInstance(type);
 
             //Get the field and If the field is not found it throws null exception and if message is empty throw exception
-            // catch the exception if thrown
             try
             {
                 // Get the field by using reflections
                 FieldInfo fieldInfo = type.GetField(fieldName);
 
-                // set the field value of a particular field in particular object
+                // Initialise the value of a message field in mood object
                 fieldInfo.SetValue(mood, message);
 
-                // Get the method using reflection
-                MethodInfo method = type.GetMethod("AnalyseMood");
+                // Accessing the method details using reflection call
+                MethodInfo method = type.GetMethod("analyseMood");
 
-                // Invoke the method using reflection
+                // Calling the method using reflection for passing the null message to analyse mood
                 object methodReturn = method.Invoke(mood, null);
                 return methodReturn;
             }
