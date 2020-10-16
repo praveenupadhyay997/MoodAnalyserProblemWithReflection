@@ -1,3 +1,9 @@
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestClassForMoodEvaluation.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Praveen Kumar Upadhyay"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace TestProjectForMoodAnalyser
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -6,10 +12,11 @@ namespace TestProjectForMoodAnalyser
     [TestClass]
     public class TestClassForMoodEvaluation
     {
+        //Constants declared to match to the mood returned from the analyseMood function
         public const string SAD_MOOD = "SAD";
         public const string HAPPY_MOOD = "HAPPY";
         /// <summary>
-        /// Checking for sad for sad mood
+        /// Checking for sad for sad mood when the message passed contains sad
         /// </summary>
         [TestMethod]
         public void TestMethodForSadMood()
@@ -21,7 +28,9 @@ namespace TestProjectForMoodAnalyser
             //Assert
             Assert.AreEqual(SAD_MOOD, actual);
         }
-        ///
+        /// <summary>
+        /// Test for the happy mood when the message passed contains happy or any
+        /// </summary>
         [TestMethod]
         public void TestMethodForHappyMood()
         {
@@ -166,11 +175,14 @@ namespace TestProjectForMoodAnalyser
             //Act
             try
             {
+                //The object variable will contain an instance of the MoodAnalyserClass by invoking the parameterised constructor and passing the message of happy mood
+                //The above proposition would be true only if the class name passed would be correct
                 var obj = MoodAnalyserReflector.CreateMoodAnalyserObject("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyserClass", "I am in happy mood today");
             }
             //Assert
             catch (MoodAnalysisCustomException exception)
             {
+                //Catching the no class found exception and printing it using the custom exception created
                 Assert.AreEqual("No such class found", exception.Message);
             }
         }

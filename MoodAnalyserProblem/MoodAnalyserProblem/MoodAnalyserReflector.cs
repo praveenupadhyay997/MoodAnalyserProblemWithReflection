@@ -1,4 +1,10 @@
-﻿namespace MoodAnalyserProblem
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MoodAnalyserReflector.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Praveen Kumar Upadhyay"/>
+// --------------------------------------------------------------------------------------------------------------------
+namespace MoodAnalyserProblem
 {
     using System;
     using System.Collections.Generic;
@@ -16,12 +22,12 @@
         /// <returns></returns>
         public static Object CreateMoodAnalyserObject(string className, string constructorName, string message)
         {
-            //getting the type of MoodAnalyserClass
+            //Accessing the type of MoodAnalyserClass using the reflection Type function. type will now contain all the metadata of the MoodAnalyserClass
             Type type = typeof(MoodAnalyserClass);
             //If the class name exists in given assembly
             if (type.Name.Equals(className) || type.FullName.Equals(className))
             {
-                //If the constructor passed is correct
+                //If the constructor name passed is correct and matches with the name of the mood analyser class
                 if (type.Name.Equals(constructorName))
                 {
                     //Creates instance of class by calling the parameterised constructor for some non-empty message passed and defaul constructor in case of null message
@@ -31,9 +37,9 @@
                 else
                     throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_CONSTRUCTOR, "No such constructor found");
             }
-            //If the class passed doesnt exist throw custom exception of class not found
             else
             {
+                //If the class passed doesnt exist throw custom exception of class not found is thrown
                 throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_CLASS, "No such class found");
             }
         }
@@ -52,7 +58,7 @@
             Type type = typeof(MoodAnalyserClass);
             try
             {
-                //Fetching the method info using reflection
+                //Fetching the method info using reflection and accessing it's metadata
                 MethodInfo methodInfo = type.GetMethod(methodName);
                 //Invoking the method of Mood Analyser Class
                 Object obj = methodInfo.Invoke(moodAnalysis, null);
@@ -61,6 +67,7 @@
             }
             catch (NullReferenceException)
             {
+                //Catching the custom exception in case the methodinfo returns a null value
                 throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_METHOD, "No such method found");
             }
         }
@@ -102,10 +109,12 @@
             }
             catch (NullReferenceException)
             {
+                //Catching the custom exception in case the field is not found and the object fieldInfo return gets null
                 throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NO_SUCH_FIELD, "No such field found");
             }
             catch
             {
+                //Catching the null exception in case the message accessed in the setvalue field is null and compiler throws a null exception
                 throw new MoodAnalysisCustomException(MoodAnalysisCustomException.ExceptionType.NULL_MESSAGE, "Mood should not be NULL");
             }
         }

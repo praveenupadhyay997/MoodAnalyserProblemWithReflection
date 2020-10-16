@@ -1,4 +1,10 @@
-﻿namespace MoodAnalyserProblem
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MoodAnalysisCustomException.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Praveen Kumar Upadhyay"/>
+// --------------------------------------------------------------------------------------------------------------------
+namespace MoodAnalyserProblem
 {
     using System;
     using System.Collections.Generic;

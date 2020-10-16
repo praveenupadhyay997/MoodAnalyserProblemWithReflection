@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MoodAnalyserReflectionClass.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Praveen Kumar Upadhyay"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace MoodAnalyserProblem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Reflection;
+
     public class MoodAnalyserReflectionClass
     {
         /// <summary>
